@@ -1,0 +1,104 @@
+Makefile generator notes
+
+Work Flow v1.0:
+
+1. Get current directory.
+2. Ask user if current directory is the project directory.
+  a. if not, user must provide directory path.
+3. Look for all cpp files in dirrectory.
+4. List files found to user.
+5. User can remove files from list by typing file names as input.
+6. Get user approval to generate Makefile
+7. Generate make file.
+
+Future Versions:
+
+v1.1:
+1. Add implementation for Windows and Linux (auto detect OS)
+
+v2.0:
+2. GUI implementation.
+
+
+
+
+
+Links:
+1. run linux commands - https://www.thegeekstuff.com/2012/03/c-process-control-functions/
+2. search files - https://stackoverflow.com/questions/24447540/c-how-to-search-files-in-a-directory-with-certain-name
+
+
+#include <sys/types.h>
+#include <dirent.h>
+#include <errno.h>
+#include <vector>
+#include <string>
+#include <iostream>
+
+using namespace std;
+
+int getdir (string dir, vector<string> &files)
+{
+    DIR *dp;
+    struct dirent *dirp;
+
+    if((dp = opendir(dir.c_str())) == NULL)
+    {
+      cout << "Error(" << errno << ") opening " << dir << endl;
+      return errno;
+    }
+    while ((dirp = readdir(dp)) != NULL)
+      files.push_back(string(dirp->d_name));
+    closedir(dp);
+    return 0;
+}
+
+int main()
+{
+    string dir = string("C:\\test");
+    vector<string> files = vector<string>();
+
+    getdir(dir,files);
+    for (unsigned int i = 0;i < files.size();i++)
+      cout << files[i] << endl;
+    return 0;
+}
+
+
+
+
+#include <sys/types.h>
+#include <dirent.h>
+#include <errno.h>
+#include <vector>
+#include <string>
+#include <iostream>
+
+using namespace std;
+
+int getdir (string dir, vector<string> &files)
+{
+    DIR *dp;
+    struct dirent *dirp;
+
+    if((dp = opendir(dir.c_str())) == NULL)
+    {
+      cout << "Error(" << errno << ") opening " << dir << endl;
+      return errno;
+    }
+    while ((dirp = readdir(dp)) != NULL)
+      files.push_back(string(dirp->d_name));
+    closedir(dp);
+    return 0;
+}
+
+int main()
+{
+    string dir = string("C:\\test");
+    vector<string> files = vector<string>();
+
+    getdir(dir,files);
+    for (unsigned int i = 0;i < files.size();i++)
+      cout << files[i] << endl;
+    return 0;
+}
