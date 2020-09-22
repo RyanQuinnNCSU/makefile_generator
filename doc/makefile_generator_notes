@@ -21,6 +21,8 @@ v2.0:
 
 
 
+New build string:
+g++ src/main.cpp src/directory_functions.cpp -o bin/make_file_gen.out
 
 
 Links:
