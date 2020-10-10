@@ -1,6 +1,7 @@
 #include <iostream>
 #include <dirent.h>
 #include <string>
+#include <vector>
 #include "../include/directory_functions.hpp"
 
 
@@ -18,10 +19,11 @@ using std::cin;
 using std::endl;
 using std::string;
 
+typedef std::vector<std::string> stringvec;
 //Function Ripped From https://www.tutorialspoint.com/find-out-the-current-working-directory-in-c-cplusplus
 //Don't reinvient the wheel.
 
-std::string get_current_dir() {
+string get_current_dir() {
    char buff[FILENAME_MAX]; //create string buffer to hold path
    GetCurrentDir( buff, FILENAME_MAX );
    string current_working_dir(buff);
