@@ -3,6 +3,8 @@
 #include <string>
 #include <algorithm>
 #include <vector>
+#include <iterator>
+#include <map>
 #include "../include/proj_dir.h"
 #include "../include/directory_functions.hpp"
 #include <boost/filesystem.hpp>
@@ -31,13 +33,25 @@ void Proj_dir::find_local_cpp_files(string current_dir_path)
     if(dirp == NULL){
       cout << "Fail to open folder" << endl;
     }
-    //cout << "before while loop" << endl; //for debug only
+
     while ((dp = readdir(dirp)) != NULL) {
       //cout << "In while loop" << endl; //for debug only
       string file_name(dp->d_name);
         if( file_name.find(".cpp") != std::string::npos) {
           //cout << file_name  << endl; //for debug only
-          files.push_back(dp->d_name);
+          //files.push_back(dp->d_name);
+          if(current_dir_path.size() == dir_path.size() ){
+
+            files.insert(std::pair<string, string>(file_name, "./"));
+          }
+          else if(current_dir_path.size() > dir_path.size()){
+            files.insert(std::pair<string, string>(file_name, "." + current_dir_path.substr( dir_path.size() ) ));
+          }
+          else {
+            cout << "Error with Current Dir Path Size" << endl;
+            files.insert(std::pair<string, string>(file_name, "X"));
+          }
+
         }
     }
     closedir(dirp);
@@ -102,9 +116,10 @@ void Proj_dir::print_dir_path(){
 
 void Proj_dir::print_cpp_files(){
   cout << "***Cpp Files***" << endl;
-  for(int x = 0; x < files.size(); x++){
-    std::cout << "*" << files[x] << endl;
-  }
+  std::map<string, string>::iterator itr;
+  for (itr = files.begin(); itr != files.end(); ++itr) {
+        cout  << "*" << itr->first << " Directory: " << itr->second << endl;
+    }
 }
 
 void Proj_dir::print_sub_directories(){

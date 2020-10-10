@@ -1,5 +1,7 @@
 #include <vector>
 #include <string>
+#include <iterator>
+#include <map>
 
 #ifndef proj_dir
 #define proj_dir
@@ -12,7 +14,8 @@ class Proj_dir{
 private:
   std::string dir_path; //full dir path
   stringvec sub_dirs; //list of sub directories
-  stringvec files; //list of cpp files
+  //stringvec files; //list of cpp files
+  std::map<std::string, std::string> files;
 
   void find_local_cpp_files(std::string current_dir_path);
   void find_local_sub_directories(std::string current_dir_path);
