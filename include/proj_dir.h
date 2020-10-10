@@ -14,8 +14,9 @@ private:
   stringvec sub_dirs; //list of sub directories
   stringvec files; //list of cpp files
 
-  void find_cpp_files();
-  void find_sub_directories();
+  void find_local_cpp_files(std::string current_dir_path);
+  void find_local_sub_directories(std::string current_dir_path);
+  void find_sub_dirs_find_files();
 public:
   Proj_dir();
   Proj_dir(std::string my_proj_dir); //primary constructor

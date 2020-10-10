@@ -1,8 +1,11 @@
 //Make File Generator main.cpp
 
 #include <iostream>
-#include "../include/directory_functions.hpp"
 #include <string>
+#include "../include/directory_functions.hpp"
+#include "../include/proj_dir.h"
+
+
 
 using std::cout;
 using std::cin;
@@ -47,15 +50,9 @@ while (!got_dir){
 
 //Find All Cpp files in project dir
 Proj_dir base_dir(project_dir); //create dir object
-bool got_sub_dirs = false;
-int sub_count = 0;
-while(!got_sub_dirs){
-if( base_dir.get_sub_dir_count() != 0){
 
-}
-
-
-}
+base_dir.print_cpp_files();
+base_dir.print_sub_directories();
 
 
 

@@ -117,3 +117,8 @@ Compile Test Image:
 g++ test/main.cpp src/proj_dir.cpp src/directory_functions.cpp -o test/proj_dir_class.out
 Run Test Image:
 ./test/proj_dir_class.out
+
+Compile Real Image:
+g++ src/main.cpp src/proj_dir.cpp src/directory_functions.cpp -lboost_filesystem -o bin/make_file_gen.out
+Run Image:
+./bin/make_file_gen.out
