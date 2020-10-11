@@ -48,7 +48,7 @@ void Proj_dir::find_local_cpp_files(string current_dir_path)
             files.insert(std::pair<string, string>(file_name, "." + current_dir_path.substr( dir_path.size() ) ));
           }
           else {
-            cout << "Error with Current Dir Path Size" << endl;
+            cout << "Error with Current Dir Path Size ლ(ಠ益ಠლ)" << endl;
             files.insert(std::pair<string, string>(file_name, "X"));
           }
 
@@ -63,17 +63,17 @@ void Proj_dir::find_local_sub_directories(string current_dir_path){
   DIR* dirp = opendir(current_dir_path.c_str());
   struct dirent * dp;
   //cout << "Find Local Directories" << endl; //for debug only
+  //cout << current_dir_path << endl; //for debug only
   while ((dp = readdir(dirp)) != NULL) {
-
       DIR* dirp2 = NULL;
-      std::string full_path = dir_path + "/" + dp->d_name;
+      std::string full_path = current_dir_path + "/" + dp->d_name;
       const char * sub_d = full_path.c_str();
       dirp2 = opendir(sub_d);
       std::string dir_name(dp->d_name);
 
       if( (dirp2 != NULL) &&  (dir_name.find(".") == std::string::npos ) ) {
         //cout << dir_name << endl; //for debug only
-        sub_dirs.push_back(dir_path + "/" + dp->d_name);
+        sub_dirs.push_back(current_dir_path + "/" + dp->d_name);
        closedir(dirp2);
 
      }
@@ -94,16 +94,17 @@ void Proj_dir::find_sub_dirs_find_files(){
   while (iter != end)
   {
     //get local dirs and files
-    if(filesys::is_directory(iter->path().string() ) ){
-    find_local_cpp_files(iter->path().string());
-    find_local_sub_directories(iter->path().string());
+    string iter_path = iter->path().string();
+    if(filesys::is_directory(iter_path ) &&  (iter_path.find(".") == std::string::npos) ){
+    find_local_cpp_files(iter_path);
+    find_local_sub_directories(iter_path);
   }
     //cout << iter->path().string() << endl;
       error_code ec;
       // Increment the iterator to point to next entry in recursive iteration
       iter.increment(ec);
       if (ec) {
-          std::cerr << "Error While Accessing : " << iter->path().string() << " :: " << ec.message() << '\n';
+          std::cerr << "Error While Accessing : " << iter_path << " :: " << ec.message() << '\n';
       }
   }
 
