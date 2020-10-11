@@ -42,18 +42,31 @@ while (!got_dir){
     cout << "Is " << get_current_dir() << " your project directory? Please type \"yes\" or \"no\".  " << endl;
     cin >> dir_check;
   }
-
-
-
-
 }
 
-//Find All Cpp files in project dir
+//Create list of all Project Files All Cpp files in project dir
+cout << "Searching for CPP files in your project." << endl << endl;
 Proj_dir base_dir(project_dir); //create dir object
-
 base_dir.print_cpp_files();
-base_dir.print_sub_directories();
+//base_dir.print_sub_directories();
 
+//Request User to specify any files they don't want included in the make file.
+bool done_removing_files = false;
 
+cout << endl << "Above is a list of all the CPP files found in the project directory." << endl << "If you don't want some of these files to be part of the makefile please type out the file names (press ENTER after each file name)." << endl;
+cout << "After you have typed out all your files you want ignored or if you don't want to ignore any files type \'DONE\'." << endl;
 
+while (!done_removing_files){
+  string remove_file;
+  cin >> remove_file;
+  if(remove_file != "DONE"){
+    base_dir.remove_file_from_list(remove_file);
+  }
+  else{
+    done_removing_files = true;
+  }
+}
+base_dir.print_cpp_files();
+
+//end of main
 }

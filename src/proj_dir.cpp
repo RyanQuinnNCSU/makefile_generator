@@ -95,7 +95,7 @@ void Proj_dir::find_sub_dirs_find_files(){
   {
     //get local dirs and files
     string iter_path = iter->path().string();
-    if(filesys::is_directory(iter_path ) &&  (iter_path.find(".") == std::string::npos) ){
+    if(filesys::is_directory(iter_path ) && (iter_path.find(".") == std::string::npos) ){
     find_local_cpp_files(iter_path);
     find_local_sub_directories(iter_path);
   }
@@ -110,6 +110,17 @@ void Proj_dir::find_sub_dirs_find_files(){
 
 }
 
+
+void Proj_dir::remove_file_from_list(string file_name){
+
+  if(files.erase(file_name) != 0){
+    cout << "Removed file \'" << file_name << "\' from compile list." << endl;
+  }
+  else{
+    cout << "File name \'" << file_name << "\' not in list. Please make sure you typed the file name correctly." << endl;
+  }
+}
+
 void Proj_dir::print_dir_path(){
   cout << "***Directory Path***" << endl;
   cout << "*" << dir_path << endl;
@@ -119,7 +130,7 @@ void Proj_dir::print_cpp_files(){
   cout << "***Cpp Files***" << endl;
   std::map<string, string>::iterator itr;
   for (itr = files.begin(); itr != files.end(); ++itr) {
-        cout  << "*" << itr->first << " Directory: " << itr->second << endl;
+        cout  << "*" << itr->first << " In Directory: " << itr->second << endl;
     }
 }
 

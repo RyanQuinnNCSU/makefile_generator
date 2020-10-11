@@ -23,6 +23,7 @@ private:
 public:
   Proj_dir();
   Proj_dir(std::string my_proj_dir); //primary constructor
+  void remove_file_from_list(std::string file_name);
   void print_dir_path();
   void print_cpp_files();
   void print_sub_directories();
