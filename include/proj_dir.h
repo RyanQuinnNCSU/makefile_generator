@@ -30,6 +30,8 @@ public:
   int get_sub_dir_count();
   int get_cpp_file_count();
   stringvec get_sub_dirs_vector();
+  std::map<std::string, std::string>::iterator init_iterator(int get_type);
+  std::string parse_file_map(std::map<std::string, std::string>::iterator itr, int column);
   ~Proj_dir(); //destructor
 };
 

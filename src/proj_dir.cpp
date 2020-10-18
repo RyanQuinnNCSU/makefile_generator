@@ -57,6 +57,38 @@ void Proj_dir::find_local_cpp_files(string current_dir_path)
     closedir(dirp);
 }
 
+std::map<string, string>::iterator Proj_dir::init_iterator(int get_type){
+  std::map<string, string>::iterator itr;
+  //cout << "***Set iterator to start of map***" << endl;
+  if(get_type == 0){
+  return itr = files.begin();
+  }
+  else if(get_type == 0){
+  return itr = files.end();
+  }
+  else{
+    //cout << "Invalid get type number. Must be 0 or 1" << endl;
+    return itr = files.end();
+  }
+
+}
+
+string Proj_dir::parse_file_map(std::map<string, string>::iterator itr, int column){
+    if(column == 0){
+        //cout << "***Return Filename***" << endl;
+        return itr->first;
+    }
+    else if(column == 1){
+       //cout << "***Return File Path ***" << endl;
+       return itr->second;
+    }
+    else{
+      //cout << "Invalid column number. Must be 0 or 1" << endl;
+      return "ERROR";
+    }
+
+  }
+
 
 
 void Proj_dir::find_local_sub_directories(string current_dir_path){
@@ -129,7 +161,7 @@ void Proj_dir::print_dir_path(){
 void Proj_dir::print_cpp_files(){
   cout << "***Cpp Files***" << endl;
   std::map<string, string>::iterator itr;
-  for (itr = files.begin(); itr != files.end(); ++itr) {
+  for (itr = files.begin(); itr != files.end(); itr++) {
         cout  << "*" << itr->first << " In Directory: " << itr->second << endl;
     }
 }
