@@ -67,7 +67,7 @@ std::map<string, string>::iterator Proj_dir::init_iterator(int get_type){
   return itr = files.end();
   }
   else{
-    //cout << "Invalid get type number. Must be 0 or 1" << endl;
+    //cout << "Invalid get type number. Must be 0 or 1" remove_file_from_list<< endl;
     return itr = files.end();
   }
 
@@ -152,6 +152,39 @@ void Proj_dir::remove_file_from_list(string file_name){
     cout << "File name \'" << file_name << "\' not in list. Please make sure you typed the file name correctly." << endl;
   }
 }
+
+int Proj_dir::remove_file(string dir_name){
+	int erase_count = 0;
+	for(std::map<string, string>::iterator iter = init_iterator(0); iter != init_iterator(1); iter++){
+  	  if(dir_name == parse_file_map(iter,1) ){ //if directory in map matches dir provided by user
+  		 files.erase(parse_file_map(iter,0));  // erase file tied to that directory.
+  		 cout << "Removed file \'" << parse_file_map(iter,0) << "\' from compile list." << endl;
+		 return ++erase_count;
+  	  }
+
+    }
+	return 0;
+}
+
+void Proj_dir::remove_dir_files_from_list(string dir_name){
+  int erase_count = 0;
+  int return_val = 0;
+  bool keep_going = true;
+  while(keep_going){
+	  return_val = remove_file(dir_name);
+	  if(return_val == 0){
+		 keep_going = false;
+	  }
+	  else{
+		erase_count += return_val;
+	  }
+  }
+  if(erase_count == 0){
+	 cout << "No files found in this directory path. Please make sure you typed the directory path name correctly." << endl;
+  }
+//cout << "End" << endl;
+}
+
 
 void Proj_dir::print_dir_path(){
   cout << "***Directory Path***" << endl;

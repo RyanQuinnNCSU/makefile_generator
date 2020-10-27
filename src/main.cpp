@@ -67,7 +67,12 @@ while (!done_removing_files){
   string remove_file;
   cin >> remove_file;
   if(remove_file != "DONE"){
-    base_dir.remove_file_from_list(remove_file);
+	if(remove_file.at(0) != '.'){
+    	base_dir.remove_file_from_list(remove_file);
+	}
+	else{
+		base_dir.remove_dir_files_from_list(remove_file);
+	}
   }
   else{
     done_removing_files = true;

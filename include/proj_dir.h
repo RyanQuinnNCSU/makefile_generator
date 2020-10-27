@@ -20,10 +20,12 @@ private:
   void find_local_cpp_files(std::string current_dir_path);
   void find_local_sub_directories(std::string current_dir_path);
   void find_sub_dirs_find_files();
+  int remove_file(std::string dir_name);
 public:
   Proj_dir();
   Proj_dir(std::string my_proj_dir); //primary constructor
   void remove_file_from_list(std::string file_name);
+  void remove_dir_files_from_list(std::string dir_name);
   void print_dir_path();
   void print_cpp_files();
   void print_sub_directories();
