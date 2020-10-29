@@ -54,6 +54,13 @@ while (!got_dir){
 //Create list of all Project Files All Cpp files in project dir
 cout << "Searching for CPP files in your project." << endl << endl;
 Proj_dir base_dir(project_dir); //create dir object
+
+cout << "**********************" << endl;
+cout << "**********************" << endl;
+cout << "***Find Cpp Files" << endl;
+cout << "**********************" << endl;
+cout << "**********************" << endl;
+
 base_dir.print_cpp_files();
 //base_dir.print_sub_directories();
 
@@ -61,12 +68,17 @@ base_dir.print_cpp_files();
 bool done_removing_files = false;
 
 cout << endl << "Above is a list of all the CPP files found in the project directory." << endl << "If you don't want some of these files to be part of the makefile please type out the file names (press ENTER after each file name)." << endl;
+cout << "If there is a directory in which you want all all the files to be ignored, please provide the path to that directory. Ex: typing \"./test\" will prevent all files from the \"test\" project sub-directory from being compiled." << endl;
+cout << "Type \'LIST\' to see the your changes to the files list." << endl;
 cout << "After you have typed out all your files you want ignored or if you don't want to ignore any files type \'DONE\'." << endl;
 
 while (!done_removing_files){
   string remove_file;
   cin >> remove_file;
-  if(remove_file != "DONE"){
+  if(remove_file == "LIST"){
+	 base_dir.print_cpp_files();
+  }
+  else if(remove_file != "DONE"){
 	if(remove_file.at(0) != '.'){
     	base_dir.remove_file_from_list(remove_file);
 	}
@@ -81,6 +93,11 @@ while (!done_removing_files){
 base_dir.print_cpp_files();
 
 //Link Libraries.
+cout << "**********************" << endl;
+cout << "**********************" << endl;
+cout << "***Library Links" << endl;
+cout << "**********************" << endl;
+cout << "**********************" << endl;
 bool library_links_given = false;
 stringvec library_links;
 cout << "Please provide any library links (paths) for libraries not part of the standard libary." << endl;
@@ -106,7 +123,44 @@ while (!library_links_given){
   }
 }
 
+//Flags.
+cout << "**********************" << endl;
+cout << "**********************" << endl;
+cout << "***Compile Flags" << endl;
+cout << "**********************" << endl;
+cout << "**********************" << endl;
+bool flags_given = false;
+stringvec flags;
+cout << "Please provide any compilation flags you want to include int final g++ command the make file will execute." << endl;
+cout << "Type one compilation flag then press ENTER befor typing the next. Type DONE if you require no flags or have added all your flags." << endl;
+cout << "If a mistake is made, type REMOVE to clear the last flag provided from the list." << endl;
+while (!flags_given){
+  string flag_name;
+  cin >> flag_name;
+  if(flag_name.size() == 0){
+    cout << "Please provide a compile flag or type DONE if your not using any flags for the g++ command." << endl;
+    }
+  else if(flag_name == "DONE") {
+
+    flags_given = true;
+  }
+  else if(flag_name == "REMOVE") {
+    cout << "Removing " + flag_name + " to list of flags" << endl;
+    flags.pop_back();
+  }
+  else{
+    cout << "Adding " + flag_name + " to list of flags" << endl;
+    flags.push_back(flag_name);
+  }
+}
+
 //name output file
+cout << "**********************" << endl;
+cout << "**********************" << endl;
+cout << "***Name Output File" << endl;
+cout << "**********************" << endl;
+cout << "**********************" << endl;
+
 bool output_file_name_given = false;
 string output_file_name;
 cout << "What would you link your output file (the executable) to be called? Please provide the name below." << endl;
@@ -149,7 +203,14 @@ for (std::map<string, string>::iterator itr = base_dir.init_iterator(0); itr != 
     cout << object_path + "/" + object_name + ".o" << endl;
   }
 
-write_basic_makefile(object_files_w_path, object_files, cpp_files, library_links, output_file_name);
+write_basic_makefile(object_files_w_path, object_files, cpp_files, library_links, flags, output_file_name);
+cout << "**********************" << endl;
+cout << "**********************" << endl;
+cout << "***End of Program" << endl;
+cout << "**********************" << endl;
+cout << "**********************" << endl;
+cout << "A makefile has been creating in the project directory." << endl;
+cout << "Type \'make\' to build your Cpp project." << endl;
 
 //MyFile.close();
 //end of main

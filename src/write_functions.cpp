@@ -13,14 +13,20 @@ using std::endl;
 using std::string;
 
 
-void write_basic_makefile(stringvec object_files_w_path, stringvec object_files, stringvec cpp_files, stringvec library_links, string output_file_name){
+void write_basic_makefile(stringvec object_files_w_path, stringvec object_files, stringvec cpp_files, stringvec library_links, stringvec flags, string output_file_name){
   std::ofstream MyFile("makefile");
   //Define complier variable
   MyFile << "CC = g++ " << endl;
   //Define links variable
-    MyFile << "LINKS = ";
+  MyFile << "LINKS = ";
   for(int i4 = 0; i4 < library_links.size(); i4++){
     MyFile << library_links[i4] + " ";
+  }
+  MyFile << endl;
+  //Define flag variable
+  MyFile << "FLAGS = ";
+  for(int i5 = 0; i5 < flags.size(); i5++){
+    MyFile << flags[i5] + " ";
   }
   MyFile << endl;
   //Define file objects variable
@@ -36,7 +42,7 @@ void write_basic_makefile(stringvec object_files_w_path, stringvec object_files,
   MyFile << endl;
 
   MyFile << "main: $(OBJECTS)" << endl;
-  MyFile << "\t$(CC) $(OBJECTS) $(LINKS) -o $(OUTPUT)" << endl;
+  MyFile << "\t$(CC) $(OBJECTS) $(FLAGS) $(LINKS) -o $(OUTPUT)" << endl;
 
 
   //define each object
