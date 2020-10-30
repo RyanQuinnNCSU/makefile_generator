@@ -69,7 +69,7 @@ bool done_removing_files = false;
 
 cout << endl << "Above is a list of all the CPP files found in the project directory." << endl << "If you don't want some of these files to be part of the makefile please type out the file names (press ENTER after each file name)." << endl;
 cout << "If there is a directory in which you want all all the files to be ignored, please provide the path to that directory. Ex: typing \"./test\" will prevent all files from the \"test\" project sub-directory from being compiled." << endl;
-cout << "Type \'LIST\' to see the your changes to the files list." << endl;
+cout << "Type \'LIST\' to see your changes to the files list." << endl;
 cout << "After you have typed out all your files you want ignored or if you don't want to ignore any files type \'DONE\'." << endl;
 
 while (!done_removing_files){
@@ -102,6 +102,7 @@ bool library_links_given = false;
 stringvec library_links;
 cout << "Please provide any library links (paths) for libraries not part of the standard libary." << endl;
 cout << "Type one library link then press ENTER befor typing the next. Type DONE if you require no links or have added all your links." << endl;
+cout << "Type \'LIST\' to see the your changes to the link list." << endl;
 cout << "If a mistake is made, type REMOVE to clear the last link provided from the list." << endl;
 while (!library_links_given){
   string link_name;
@@ -114,8 +115,19 @@ while (!library_links_given){
     library_links_given = true;
   }
   else if(link_name == "REMOVE") {
-    cout << "Removing " + link_name + " to list of links" << endl;
-    library_links.pop_back();
+	if(library_links.size() > 0){
+		cout << "Removing last entry in list of links" << endl;
+	    library_links.pop_back();
+	}
+	else{
+	 cout << "No links to remove." << endl;
+	}
+  }
+  else if(link_name == "LIST"){
+	  cout << "***Library Links***" << endl;
+	  for(stringvec::iterator link_it = library_links.begin(); link_it != library_links.end(); link_it++){
+		  	cout << *link_it << endl;
+		  }
   }
   else{
     cout << "Adding " + link_name + " to list of links" << endl;
@@ -133,6 +145,7 @@ bool flags_given = false;
 stringvec flags;
 cout << "Please provide any compilation flags you want to include int final g++ command the make file will execute." << endl;
 cout << "Type one compilation flag then press ENTER befor typing the next. Type DONE if you require no flags or have added all your flags." << endl;
+cout << "Type \'LIST\' to see your changes to the flags list." << endl;
 cout << "If a mistake is made, type REMOVE to clear the last flag provided from the list." << endl;
 while (!flags_given){
   string flag_name;
@@ -145,8 +158,19 @@ while (!flags_given){
     flags_given = true;
   }
   else if(flag_name == "REMOVE") {
-    cout << "Removing " + flag_name + " to list of flags" << endl;
-    flags.pop_back();
+	  if(flags.size() > 0){
+		  cout << "Removing last entry to list of flags" << endl;
+  	    flags.pop_back();
+  	}
+  	else{
+  	 cout << "No flags to remove." << endl;
+  	}
+  }
+  else if(flag_name == "LIST"){
+	  cout << "***g++ flags***" << endl;
+	  for(stringvec::iterator flag_it = flags.begin(); flag_it != flags.end(); flag_it++){
+		  	cout << *flag_it << endl;
+		  }
   }
   else{
     cout << "Adding " + flag_name + " to list of flags" << endl;
