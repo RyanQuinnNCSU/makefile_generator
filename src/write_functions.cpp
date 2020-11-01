@@ -3,6 +3,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include <sys/stat.h>
 #include "../include/write_functions.hpp"
 
 typedef std::vector<std::string> stringvec;
@@ -12,6 +13,35 @@ using std::cin;
 using std::endl;
 using std::string;
 
+int make_bin(){
+	DIR* bin = opendir("bin");
+	//see if bin exist
+	if (bin)
+	{
+	    /* Directory exists. */
+	    closedir(bin);
+	}
+	else if (ENOENT == errno)
+	{
+	    /* Directory does not exist. */
+		if (mkdir("bin", 0777) == -1){
+        	cout << "Failed to make \"bin\" directory." << endl;
+			return 1;
+		}
+    	else
+		{
+        	cout << "A \"bin\" directory created." << endl;
+		}
+
+	}
+	else
+	{
+		cout << "Error while check if ./bin exist." << endl;
+		return 1;
+	    /* opendir() failed for some other reason. */
+	}
+	return 0;
+}
 
 void write_basic_makefile(stringvec object_files_w_path, stringvec object_files, stringvec cpp_files, stringvec library_links, stringvec flags, string output_file_name){
   std::ofstream MyFile("makefile");

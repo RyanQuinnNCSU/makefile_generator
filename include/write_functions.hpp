@@ -6,6 +6,7 @@
 
 typedef std::vector<std::string> stringvec;
 
+int make_bin();
 void write_basic_makefile(stringvec object_files_w_path, stringvec object_files, stringvec cpp_files, stringvec library_links, stringvec flags, std::string output_file_name);
 
 #endif

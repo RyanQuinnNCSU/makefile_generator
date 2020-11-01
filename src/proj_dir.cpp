@@ -157,8 +157,8 @@ int Proj_dir::remove_file(string dir_name){
 	int erase_count = 0;
 	for(std::map<string, string>::iterator iter = init_iterator(0); iter != init_iterator(1); iter++){
   	  if(dir_name == parse_file_map(iter,1) ){ //if directory in map matches dir provided by user
+		 cout << "Removed file \'" << parse_file_map(iter,0) << "\' from compile list." << endl;
   		 files.erase(parse_file_map(iter,0));  // erase file tied to that directory.
-  		 cout << "Removed file \'" << parse_file_map(iter,0) << "\' from compile list." << endl;
 		 return ++erase_count;
   	  }
 
