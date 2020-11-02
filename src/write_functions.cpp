@@ -43,8 +43,9 @@ int make_bin(){
 	return 0;
 }
 
-void write_basic_makefile(stringvec object_files_w_path, stringvec object_files, stringvec cpp_files, stringvec library_links, stringvec flags, string output_file_name){
-  std::ofstream MyFile("makefile");
+void write_basic_makefile(string project_dir, stringvec object_files_w_path, stringvec object_files, stringvec cpp_files, stringvec library_links, stringvec flags, string output_file_name){
+  string makefile_path = project_dir + "/makefile";
+  std::ofstream MyFile(makefile_path);
   //Define complier variable
   MyFile << "CC = g++ " << endl;
   //Define links variable
