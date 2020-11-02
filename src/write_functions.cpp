@@ -30,7 +30,7 @@ int make_bin(){
 		}
     	else
 		{
-        	cout << "A \"bin\" directory created." << endl;
+        	cout << "A \"bin\" directory has been created." << endl;
 		}
 
 	}
