@@ -79,13 +79,13 @@ void write_basic_makefile(string project_dir, stringvec object_files_w_path, str
 
   //define each object
   for(int i3 = 0; i3 < object_files.size(); i3++){
-    MyFile << object_files[i3] + ": " + cpp_files[i3] << endl;
-    MyFile << "\tg++ " + cpp_files[i3] << endl;
+    MyFile << object_files[i3] + ":" << endl;
+    MyFile << "\tg++ -c " + cpp_files[i3] << endl;
   }
 
   MyFile << ".PHONY : clean" << endl;
   MyFile << "clean :" << endl;
-  MyFile << "\t-rm -f $(OBJECTS)";
+  MyFile << "\t-rm -f $(OBJECTS) $(OUTPUT)";
 
   //close file
   MyFile.close();
