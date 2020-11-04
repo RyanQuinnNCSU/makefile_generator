@@ -13,8 +13,9 @@ using std::cin;
 using std::endl;
 using std::string;
 
-int make_bin(){
-	DIR* bin = opendir("bin");
+int make_bin(string project_dir){
+	string bin_path = project_dir + "/bin";
+	DIR* bin = opendir(bin_path.c_str());
 	//see if bin exist
 	if (bin)
 	{
@@ -24,7 +25,7 @@ int make_bin(){
 	else if (ENOENT == errno)
 	{
 	    /* Directory does not exist. */
-		if (mkdir("bin", 0777) == -1){
+		if (mkdir(bin_path.c_str(), 0777) == -1){
         	cout << "Failed to make \"bin\" directory." << endl;
 			return 1;
 		}
