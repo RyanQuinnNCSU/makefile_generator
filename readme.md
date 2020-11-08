@@ -53,7 +53,7 @@ n
 
 if you typed "Y" for yes, then move on to the next section.
 
-If the current directory is not the directory of your C++ project you will need to provide the full directory path. For example, if I want to generate a makefile for TestChain, an opensource blockchain C++ project made by Dave Nash (clone his repo at https://github.com/teaandcode/TestChain),but I am running the program from my makefile_generator directory I need to provide the full file path to the TestChain project.
+If the current directory is not the directory of your C++ project you will need to provide the full directory path. For example, if I want to generate a makefile for TestChain, an opensource blockchain C++ project made by Dave Nash (clone his repo at https://github.com/teaandcode/TestChain), but I am running the program from my makefile_generator directory I need to provide the full file path to the TestChain project.
 
 ```
 lab-pc@labpc-ThinkPad-T540p:~/Documents/Cpp_Development/makefile_generator$ ./bin/makefile_gen.out
