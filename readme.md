@@ -1,7 +1,7 @@
 # makefile_generator
 > An opensource makefile generator for C++ projects Linux.
 
-##Table of Contents
+## Table of Contents
 1. Project Summary
 2. Makefile Generator Release v1.0 Notes
 3. Setup Requirements
